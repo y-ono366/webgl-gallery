@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.js --mode development",
-    "build": "webpack",
+    "build": "webpack --mode production",
+    "build:dev": "webpack --mode development",
     "lint": "eslint './**/*.{js,ts,tsx}'",
     "lint:fix": "eslint './**/*.{js,ts,tsx}' --fix"
   },
@@ -23,6 +24,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
+    "file-loader": "^6.0.0",
     "prettier": "^2.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

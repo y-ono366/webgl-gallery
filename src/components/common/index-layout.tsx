@@ -7,11 +7,10 @@ export default class IndexLayout extends React.Component<{}> {
     return (
       <Wrapper>
         <Header />
+        {this.props.children}
       </Wrapper>
     )
   }
 }
 
-const Wrapper = styled.div`
-  text-align: center;
-`
+const Wrapper = styled.div``
