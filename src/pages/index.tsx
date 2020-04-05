@@ -1,7 +1,7 @@
-import * as React from 'react';
+import * as React from 'react'
 
 export default class Index extends React.Component<{}> {
-    render() {
-        return <div>Index</div>
-    }
+  render(): JSX.Element {
+    return <div>Index</div>
+  }
 }

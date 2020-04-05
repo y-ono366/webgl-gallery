@@ -1,4 +1,4 @@
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   mode: 'development',
@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -17,17 +17,11 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [
-      '.ts', '.js','.tsx'
-    ],
+    extensions: ['.ts', '.js', '.tsx'],
   },
   devServer: {
     contentBase: './dist',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
-  plugins: [
-    new CopyPlugin([
-      { from: './public'},
-    ]),
-  ]
-};
+  plugins: [new CopyPlugin([{ from: './public' }])],
+}
