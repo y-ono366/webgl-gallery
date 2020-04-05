@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const CopyPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   mode: 'development',
@@ -17,7 +18,11 @@ module.exports = {
       },
     ],
   },
+
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
     extensions: ['.ts', '.js', '.tsx'],
   },
   devServer: {
