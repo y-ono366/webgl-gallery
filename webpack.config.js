@@ -2,7 +2,7 @@
 const CopyPlugin = require('copy-webpack-plugin')
 const path = require('path')
 module.exports = {
-  entry: './src/main.tsx',
+  entry: './src/App.tsx',
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
