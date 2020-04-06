@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-interface ItemsTypes {
+type ItemsTypes = {
   items: ItemType[]
 }
 interface ItemType {
@@ -11,35 +11,33 @@ interface ItemType {
   link: string
 }
 
-export default class ThumbnailList extends React.Component<ItemsTypes> {
-  isImage(thumbnail: string): boolean {
-    return /(png|jpg)+$/.test(thumbnail)
-  }
-  render(): JSX.Element {
-    return (
-      <Wrapper>
-        {this.props.items.map((item, key) => {
-          if (this.isImage(item.thumbnail)) {
-            return (
-              <Thumbnail>
-                <Link to={item.link}>
-                  <img key={key} src={item.thumbnail} alt={item.alt} />
-                </Link>
-              </Thumbnail>
-            )
-          } else {
-            return (
-              <Thumbnail>
-                <Link to={item.link}>
-                  <video key={key} src={item.thumbnail} loop muted />
-                </Link>
-              </Thumbnail>
-            )
-          }
-        })}
-      </Wrapper>
-    )
-  }
+const isImage = (thumbnail: string): boolean => {
+  return /(png|jpg)+$/.test(thumbnail)
+}
+const ThumbnailList: React.FC<ItemsTypes> = ({ items }) => {
+  return (
+    <Wrapper>
+      {items.map((item, key) => {
+        if (isImage(item.thumbnail)) {
+          return (
+            <Thumbnail>
+              <Link to={item.link}>
+                <img key={key} src={item.thumbnail} alt={item.alt} />
+              </Link>
+            </Thumbnail>
+          )
+        } else {
+          return (
+            <Thumbnail>
+              <Link to={item.link}>
+                <video key={key} src={item.thumbnail} loop muted />
+              </Link>
+            </Thumbnail>
+          )
+        }
+      })}
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.div`
@@ -57,3 +55,4 @@ const Thumbnail = styled.div`
     height: 180px;
   }
 `
+export default ThumbnailList
