@@ -47,9 +47,11 @@ module.exports = {
       {
         from: 'assets',
         to: 'assets',
+        ignore: ['.DS_Store'],
       },
       {
         from: 'public',
+        ignore: ['.DS_Store'],
       },
     ]),
   ],

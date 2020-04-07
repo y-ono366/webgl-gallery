@@ -1,6 +1,6 @@
 import * as React from 'react'
 import IndexLayout from '@/components/common/index-layout'
-import ThumbnailList from '@/components/index/thumnail-list'
+import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
@@ -42,11 +42,9 @@ const items = [
   },
 ]
 
-const Index: React.FC = () => {
-  return (
-    <IndexLayout>
-      <ThumbnailList items={items} />
-    </IndexLayout>
-  )
-}
+const Index: React.FC = () => (
+  <IndexLayout>
+    <ThumbnailList items={items} />
+  </IndexLayout>
+)
 export default Index
