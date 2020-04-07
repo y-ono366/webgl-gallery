@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Index from './pages/index'
 import Particle from './pages/detail/particle'
 import SampleBox from './pages/detail/samplebox'
+import SampleBox2 from './pages/detail/samplebox2'
 
 ReactDOM.render(
   <HashRouter>
@@ -11,6 +12,7 @@ ReactDOM.render(
       <Route exact path="/" component={Index} />
       <Route exact path="/particle" component={Particle} />
       <Route exact path="/samplebox" component={SampleBox} />
+      <Route exact path="/samplebox2" component={SampleBox2} />
       <Redirect to="/" />
     </Switch>
   </HashRouter>,
