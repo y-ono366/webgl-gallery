@@ -5,6 +5,7 @@ import Index from './pages/index'
 import Particle from './pages/detail/particle'
 import SampleBox from './pages/detail/samplebox'
 import SampleBox2 from './pages/detail/samplebox2'
+import Lines from './pages/detail/lines'
 
 ReactDOM.render(
   <HashRouter>
@@ -13,6 +14,7 @@ ReactDOM.render(
       <Route exact path="/particle" component={Particle} />
       <Route exact path="/samplebox" component={SampleBox} />
       <Route exact path="/samplebox2" component={SampleBox2} />
+      <Route exact path="/lines" component={Lines} />
       <Redirect to="/" />
     </Switch>
   </HashRouter>,
