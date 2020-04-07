@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'unicorn/number-literal-case': 'off',
+    'react/prop-types': ['enabled', { ignore: 'ignore', customValidators: 'customValidator' }],
   },
 }
