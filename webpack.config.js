@@ -5,8 +5,12 @@ module.exports = {
   entry: './src/App.tsx',
   output: {
     path: __dirname + '/dist',
-    publicPath: '/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   module: {
     rules: [

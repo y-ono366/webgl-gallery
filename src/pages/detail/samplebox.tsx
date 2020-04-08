@@ -36,6 +36,8 @@ const SampleBox: React.FC = () => {
     animate()
     return () => {
       cancelAnimationFrame(animateFrameId)
+      material.dispose()
+      geometry.dispose()
       scene.remove(mesh)
       scene.remove(light)
     }

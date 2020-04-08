@@ -1,32 +1,34 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Index from './pages/index'
-import Particle from './pages/detail/particle'
-import SampleBox from './pages/detail/samplebox'
-import SampleBox2 from './pages/detail/samplebox2'
-import Lines from './pages/detail/lines'
-import Slash from './pages/detail/slash'
-import Usestrict from './pages/detail/usestrict'
-import Usestrict2 from './pages/detail/usestrict2'
-import Circle from './pages/detail/circle'
-import FragmentShader from './pages/detail/fragmentshader'
+const Index = React.lazy(() => import('@/pages/index'))
+const Particle = React.lazy(() => import('@/pages/detail/particle'))
+const SampleBox = React.lazy(() => import('@/pages/detail/samplebox'))
+const SampleBox2 = React.lazy(() => import('@/pages/detail/samplebox2'))
+const Lines = React.lazy(() => import('@/pages/detail/lines'))
+const Slash = React.lazy(() => import('@/pages/detail/slash'))
+const Usestrict = React.lazy(() => import('@/pages/detail/usestrict'))
+const Usestrict2 = React.lazy(() => import('@/pages/detail/usestrict2'))
+const Circle = React.lazy(() => import('@/pages/detail/circle'))
+const FragmentShader = React.lazy(() => import('@/pages/detail/fragmentshader'))
 
 ReactDOM.render(
   <HashRouter>
-    <Switch>
-      <Route exact path="/" component={Index} />
-      <Route exact path="/particle" component={Particle} />
-      <Route exact path="/samplebox" component={SampleBox} />
-      <Route exact path="/samplebox2" component={SampleBox2} />
-      <Route exact path="/lines" component={Lines} />
-      <Route exact path="/slash" component={Slash} />
-      <Route exact path="/usestrict" component={Usestrict} />
-      <Route exact path="/usestrict2" component={Usestrict2} />
-      <Route exact path="/circle" component={Circle} />
-      <Route exact path="/fragmentshader" component={FragmentShader} />
-      <Redirect to="/" />
-    </Switch>
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <Route exact path="/" component={Index} />
+        <Route exact path="/particle" component={Particle} />
+        <Route exact path="/samplebox" component={SampleBox} />
+        <Route exact path="/samplebox2" component={SampleBox2} />
+        <Route exact path="/lines" component={Lines} />
+        <Route exact path="/slash" component={Slash} />
+        <Route exact path="/usestrict" component={Usestrict} />
+        <Route exact path="/usestrict2" component={Usestrict2} />
+        <Route exact path="/circle" component={Circle} />
+        <Route exact path="/fragmentshader" component={FragmentShader} />
+        <Redirect to="/" />
+      </Switch>
+    </React.Suspense>
   </HashRouter>,
   document.getElementById('app')
 )
