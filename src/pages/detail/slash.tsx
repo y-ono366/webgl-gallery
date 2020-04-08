@@ -38,7 +38,6 @@ const Slash: React.FC = () => {
       transparent: true,
     })
     const smokeGeo = new THREE.PlaneGeometry(50, 50)
-    const particle = new THREE.Mesh(smokeGeo, smokeMaterial)
 
     geometry.faces.push(new THREE.Face3(4, 3, 2), new THREE.Face3(0, 2, 1))
     const faceMesh = new THREE.Mesh(geometry, faceMaterial)
@@ -65,10 +64,13 @@ const Slash: React.FC = () => {
     camera.position.set(0, 0, 100)
     renderer.setSize(window.innerWidth, window.innerHeight)
 
+    const group = new THREE.Group()
+    scene.add(group)
     for (let p = 0; p < 150; p++) {
+      const particle = new THREE.Mesh(smokeGeo, smokeMaterial)
       particle.position.set(Math.random() * 200 - 100, Math.random() * 200 - 100, 0)
       particle.rotation.z = Math.random() * 36
-      scene.add(particle)
+      group.add(particle)
       smokeParticles.push(particle)
     }
     const animate = () => {
@@ -88,14 +90,13 @@ const Slash: React.FC = () => {
       geometry.dispose()
       smokeMaterial.dispose()
       faceMaterial.dispose()
-      scene.remove(particle)
       scene.remove(faceMesh)
       scene.remove(faceMesh2)
       scene.remove(faceMesh3)
       scene.remove(faceMesh4)
       scene.remove(flash)
       scene.remove(light)
-      scene.remove(particle)
+      scene.remove(group)
     }
   }, [])
 
