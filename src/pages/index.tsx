@@ -5,7 +5,7 @@ import ThumbnailList from '@/components/index/thumbnail-list'
 const items = [
   {
     thumbnail: require('#/thumbnails/particle2.mp4').default,
-    link: '/particle2',
+    link: '/circle',
   },
   {
     thumbnail: require('#/thumbnails/particle.mp4').default,
@@ -13,7 +13,7 @@ const items = [
   },
   {
     thumbnail: require('#/thumbnails/pixijs.mp4').default,
-    link: '/pixi',
+    link: '/usestrict2',
   },
   {
     alt: 'usestrict',
