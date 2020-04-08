@@ -22,7 +22,13 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items }) => (
             {isImage(item.thumbnail) ? (
               <img src={item.thumbnail} alt={item.alt} />
             ) : (
-              <video src={item.thumbnail} loop muted />
+              <video
+                src={item.thumbnail}
+                loop
+                muted
+                onMouseEnter={(e) => onmouse(e)}
+                onMouseLeave={(e) => levemouse(e)}
+              />
             )}
           </Link>
         </Thumbnail>
@@ -30,6 +36,14 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items }) => (
     })}
   </Wrapper>
 )
+
+const onmouse = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>): void => {
+  e.target instanceof HTMLMediaElement && e.target.play()
+}
+
+const levemouse = (e: React.MouseEvent<HTMLVideoElement, MouseEvent>): void => {
+  e.target instanceof HTMLMediaElement && e.target.pause()
+}
 
 const Wrapper = styled.div`
   margin: 0 auto;
