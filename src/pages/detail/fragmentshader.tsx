@@ -164,6 +164,7 @@ const FragmentShader: React.FC = () => {
     animate()
     return () => {
       cancelAnimationFrame(animateframe)
+      pMaterial.dispose()
       scene.remove(group)
       scene.remove(helper)
       particlesData = []

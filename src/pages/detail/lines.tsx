@@ -46,6 +46,8 @@ const Lines: React.FC = () => {
     animate()
     return () => {
       cancelAnimationFrame(animateFrameId)
+      boxMaterial.dispose()
+      lineMaterial.dispose()
       scene.remove(line)
       scene.remove(box)
       scene.remove(directionalLight)
