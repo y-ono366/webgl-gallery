@@ -18,8 +18,6 @@ const Circle: React.FC = () => {
   })
   React.useEffect(() => {
     pixisec.current.appendChild(app.view)
-    app.renderer.autoDensity = true
-    app.stage.interactive = true
 
     const circlePath = new PIXI.Graphics()
 
@@ -95,7 +93,7 @@ const Circle: React.FC = () => {
       app.destroy(true)
     }
   }, [])
-  const animate = () => {
+  const animate = (): void => {
     for (let i = 0; i < circleParticle.length; i++) {
       circleParticle[i]
         .clear()
