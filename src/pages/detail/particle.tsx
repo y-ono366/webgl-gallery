@@ -7,7 +7,7 @@ interface SpriteWrap extends PIXI.Sprite {
 }
 
 const Particle: React.FC = () => {
-  const app = new PIXI.Application({
+  const app: PIXI.Application = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
   })
@@ -23,7 +23,7 @@ const Particle: React.FC = () => {
 
     const texture = app.renderer.generateTexture(graphic(), 1, 1)
 
-    for (let i = 0; i < 100; i++) {
+    for (let i: number = 0; i < 100; i++) {
       const spriteParticle = new PIXI.Sprite(texture) as SpriteWrap
       spriteParticle.x = Math.abs(Math.random() * window.innerWidth - 100)
       spriteParticle.y = Math.random() * window.innerHeight
