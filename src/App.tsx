@@ -12,11 +12,11 @@ const Usestrict2 = React.lazy(() => import('@/pages/detail/usestrict2'))
 const Circle = React.lazy(() => import('@/pages/detail/circle'))
 const FragmentShader = React.lazy(() => import('@/pages/detail/fragmentshader'))
 const Glitch = React.lazy(() => import('@/pages/detail/glitch'))
-import Loading from '@/pages/detail/loading'
+const Loading = React.lazy(() => import('@/pages/detail/loading'))
 
 ReactDOM.render(
   <HashRouter>
-    <React.Suspense fallback={<div>Loading...</div>}>
+    <React.Suspense fallback={<div>laoding...</div>}>
       <Switch>
         <Route exact path="/" component={Index} />
         <Route exact path="/particle" component={Particle} />

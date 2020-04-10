@@ -4,8 +4,9 @@ import DetailLayout from '@/components/common/detail-layout'
 import styled from 'styled-components'
 import { TweenMax } from 'gsap'
 import FontFaceObserver from 'fontfaceobserver'
+import { withRouter } from 'react-router-dom'
 
-const Loading: React.FC = () => {
+const Loading = withRouter((props) => {
   const pixisec = React.createRef<HTMLDivElement>()
   const app = new PIXI.Application({
     width: window.innerWidth,
@@ -26,7 +27,16 @@ const Loading: React.FC = () => {
   const Text = new PIXI.Text(text[0])
   const NText = new PIXI.Graphics()
   const CText = new PIXI.Graphics()
-  const CTextPosition = {}
+  const CTextPosition: { [key: string]: number } = {
+    x1: 0,
+    y1: 0,
+    x2: 70,
+    y2: 185,
+    x3: 125,
+    y3: 185,
+    x4: 55,
+    y4: 0,
+  }
 
   React.useEffect(() => {
     pixisec.current.appendChild(app.view)
@@ -55,10 +65,10 @@ const Loading: React.FC = () => {
 
     CText.beginFill(0x7fff00)
     CText.lineStyle(1, 0x7fff00, 1)
-    CText.moveTo(0, 0)
-    CText.lineTo(70, 185)
-    CText.lineTo(125, 185)
-    CText.lineTo(55, 0)
+    CText.moveTo(CTextPosition.x1, CTextPosition.y1)
+    CText.lineTo(CTextPosition.x2, CTextPosition.y2)
+    CText.lineTo(CTextPosition.x3, CTextPosition.y3)
+    CText.lineTo(CTextPosition.x4, CTextPosition.y4)
     CText.closePath()
     CText.endFill()
 
@@ -105,7 +115,39 @@ const Loading: React.FC = () => {
 
   let parcent: number = 0
   const animate = (): void => {
-    // TweenMax.to()
+    TweenMax.to(CTextPosition, 1.5, {
+      x1: -900,
+      y1: -900,
+      x2: -900,
+      y2: 900,
+      x3: 1000,
+      y3: 900,
+      x4: 1000,
+      y4: -900,
+      ease: 'power4.in',
+    }).eventCallback('onComplete', endFunc)
+    app.ticker.add(scale)
+  }
+
+  const scale = (): void => {
+    CText.clear()
+    CText.beginFill(0xffffff)
+    CText.lineStyle(1, 0xffffff, 1)
+    CText.moveTo(CTextPosition.x1, CTextPosition.y1)
+    CText.lineTo(CTextPosition.x2, CTextPosition.y2)
+    CText.lineTo(CTextPosition.x3, CTextPosition.y3)
+    CText.lineTo(CTextPosition.x4, CTextPosition.y4)
+    CText.closePath()
+    CText.endFill()
+
+    CText.position.x = window.innerWidth / 2
+    CText.position.y = window.innerHeight / 2
+    CText.pivot.x = 80
+    CText.pivot.y = 70
+  }
+
+  const endFunc = (): void => {
+    props.history.push('/')
   }
 
   return (
@@ -113,7 +155,7 @@ const Loading: React.FC = () => {
       <TextEl ref={pixisec} />
     </DetailLayout>
   )
-}
+})
 const TextEl = styled.div`
   @font-face {
     font-family: 'zouver2';
