@@ -4,6 +4,10 @@ import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
+    thumbnail: require('#/thumbnails/loading.mp4').default,
+    link: '/loading',
+  },
+  {
     thumbnail: require('#/thumbnails/particle2.mp4').default,
     link: '/circle',
   },
