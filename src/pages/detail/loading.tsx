@@ -77,14 +77,14 @@ const Loading = withRouter((props) => {
     CText.pivot.x = 80
     CText.pivot.y = 70
 
-    loopIntervalid = setInterval(loopText2, 300)
+    loopIntervalid = setInterval(loopText, 200)
 
     return () => {
       app.destroy(true)
     }
   }, [])
 
-  const loopText2 = () => {
+  const loopText = () => {
     if (textId >= text.length - 1) {
       app.stage.addChild(NText)
       app.stage.addChild(CText)
@@ -115,7 +115,7 @@ const Loading = withRouter((props) => {
 
   let parcent: number = 0
   const animate = (): void => {
-    TweenMax.to(CTextPosition, 1.5, {
+    TweenMax.to(CTextPosition, 1, {
       x1: -900,
       y1: -900,
       x2: -900,
