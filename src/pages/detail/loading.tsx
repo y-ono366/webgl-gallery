@@ -16,7 +16,7 @@ const Loading = withRouter((props) => {
   let textId: number = 0
 
   const style = new PIXI.TextStyle({
-    fill: '0x7fff00',
+    fill: '0xffffff',
     fontFamily: 'zouver2',
     fontWeight: 'normal',
     fontSize: 200,
@@ -43,8 +43,8 @@ const Loading = withRouter((props) => {
 
     loadText()
 
-    NText.beginFill(0x7fff00)
-    NText.lineStyle(1, 0x7fff00, 1)
+    NText.beginFill(0xffffff)
+    NText.lineStyle(1, 0xffffff, 1)
     NText.moveTo(0, 0)
     NText.lineTo(-45, 185)
     NText.lineTo(10, 185)
@@ -63,8 +63,8 @@ const Loading = withRouter((props) => {
     NText.pivot.x = 80
     NText.pivot.y = 70
 
-    CText.beginFill(0x7fff00)
-    CText.lineStyle(1, 0x7fff00, 1)
+    CText.beginFill(0xffffff)
+    CText.lineStyle(1, 0xffffff, 1)
     CText.moveTo(CTextPosition.x1, CTextPosition.y1)
     CText.lineTo(CTextPosition.x2, CTextPosition.y2)
     CText.lineTo(CTextPosition.x3, CTextPosition.y3)
@@ -77,14 +77,14 @@ const Loading = withRouter((props) => {
     CText.pivot.x = 80
     CText.pivot.y = 70
 
-    loopIntervalid = setInterval(loopText2, 300)
+    loopIntervalid = setInterval(loopText, 200)
 
     return () => {
       app.destroy(true)
     }
   }, [])
 
-  const loopText2 = () => {
+  const loopText = () => {
     if (textId >= text.length - 1) {
       app.stage.addChild(NText)
       app.stage.addChild(CText)
@@ -115,7 +115,9 @@ const Loading = withRouter((props) => {
 
   let parcent: number = 0
   const animate = (): void => {
-    TweenMax.to(CTextPosition, 1.5, {
+    TweenMax.to(NText, 1, { alpha: 0, ease: 'power3' })
+    TweenMax.to(Text, 1, { alpha: 0, ease: 'power3' })
+    TweenMax.to(CTextPosition, 1, {
       x1: -900,
       y1: -900,
       x2: -900,
