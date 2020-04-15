@@ -1,6 +1,6 @@
 import * as React from 'react'
 import IndexLayout from '@/components/common/index-layout'
-import Thumbnail2List from '@/components/index/thumbnail2-list'
+import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
@@ -50,7 +50,7 @@ const Index: React.FC = () => {
   React.useEffect(() => {}, [])
   return (
     <IndexLayout>
-      <Thumbnail2List items={items} />
+      <ThumbnailList items={items} />
     </IndexLayout>
   )
 }
