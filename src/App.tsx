@@ -13,6 +13,7 @@ const Circle = React.lazy(() => import('@/pages/detail/circle'))
 const FragmentShader = React.lazy(() => import('@/pages/detail/fragmentshader'))
 const Glitch = React.lazy(() => import('@/pages/detail/glitch'))
 const Loading = React.lazy(() => import('@/pages/detail/loading'))
+const Intaract = React.lazy(() => import('@/pages/detail/intaract'))
 
 ReactDOM.render(
   <HashRouter>
@@ -30,6 +31,7 @@ ReactDOM.render(
         <Route exact path="/fragmentshader" component={FragmentShader} />
         <Route exact path="/glitch" component={Glitch} />
         <Route exact path="/loading" component={Loading} />
+        <Route exact path="/intaract" component={Intaract} />
         <Redirect to="/" />
       </Switch>
     </React.Suspense>

@@ -4,19 +4,19 @@ import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
-    thumbnail: require('#/thumbnails/loading.mp4').default,
+    thumbnail: require('#/thumbnails/image/loading.png').default,
     link: '/loading',
   },
   {
-    thumbnail: require('#/thumbnails/particle2.mp4').default,
+    thumbnail: require('#/thumbnails/image/circle.png').default,
     link: '/circle',
   },
   {
-    thumbnail: require('#/thumbnails/particle.mp4').default,
+    thumbnail: require('#/thumbnails/image/particle.png').default,
     link: '/particle',
   },
   {
-    thumbnail: require('#/thumbnails/pixijs.mp4').default,
+    thumbnail: require('#/thumbnails/image/usestrict2.png').default,
     link: '/usestrict2',
   },
   {
@@ -25,30 +25,33 @@ const items = [
     link: '/usestrict',
   },
   {
-    thumbnail: require('#/thumbnails/fragmentshader.mp4').default,
+    thumbnail: require('#/thumbnails/image/fragmentshader.png').default,
     link: '/fragmentshader',
   },
   {
-    thumbnail: require('#/thumbnails/slash.mp4').default,
+    thumbnail: require('#/thumbnails/image/slash.png').default,
     link: '/slash',
   },
   {
-    thumbnail: require('#/thumbnails/lines.mp4').default,
+    thumbnail: require('#/thumbnails/image/lines.png').default,
     link: '/lines',
   },
   {
-    thumbnail: require('#/thumbnails/samplebox2.mp4').default,
+    thumbnail: require('#/thumbnails/image/samplebox2.png').default,
     link: '/samplebox2',
   },
   {
-    thumbnail: require('#/thumbnails/samplebox.mp4').default,
+    thumbnail: require('#/thumbnails/image/samplebox.png').default,
     link: '/samplebox',
   },
 ]
 
-const Index: React.FC = () => (
-  <IndexLayout>
-    <ThumbnailList items={items} />
-  </IndexLayout>
-)
+const Index: React.FC = () => {
+  React.useEffect(() => {}, [])
+  return (
+    <IndexLayout>
+      <ThumbnailList items={items} />
+    </IndexLayout>
+  )
+}
 export default Index
