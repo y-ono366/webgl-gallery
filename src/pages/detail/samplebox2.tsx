@@ -25,8 +25,13 @@ const SampleBox2: React.FC = () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
     camera.position.set(0, 0, 4)
     scene.add(mesh)
-    directionalLight.position.set(1, 1, 1)
+    directionalLight.position.set(1, 1, 100)
     scene.add(directionalLight)
+
+    window.addEventListener('mousemove', (e) => {
+      directionalLight.position.x = e.clientX - window.innerWidth / 2
+      directionalLight.position.y = -e.clientY + window.innerWidth / 2
+    })
 
     const animate = () => {
       mesh.rotation.y += 0.02

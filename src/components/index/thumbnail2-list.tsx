@@ -3,23 +3,24 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import * as THREE from 'three'
 import { RouteComponentProps, withRouter } from 'react-router'
+import { render } from 'react-dom'
+// import { TweenMax } from 'gsap'
 
-type ItemsTypes = {
+interface ItemsTypes extends RouteComponentProps {
   items: ItemType[]
-  // hi: RouteComponentProps
 }
 interface ItemType {
   alt?: string
   thumbnail: string
   link: string
 }
-const isImage = (thumbnail: string): boolean => /(png|jpg)+$/.test(thumbnail)
-const thumbnailRef = React.createRef<HTMLDivElement>()
-const Thumbnail2List: React.FC<ItemsTypes> = ({ items }) => {
+const Thumbnail2List: React.FC<ItemsTypes> = ({ items, history }) => {
   const scene = new THREE.Scene()
   const canvas = React.createRef<HTMLCanvasElement>()
-  const container = React.createRef<HTMLDivElement>()
   const panels: THREE.Mesh[] = []
+  const thumbnailRef = React.createRef<HTMLDivElement>()
+  let animationFrameId = 0
+  const container = React.createRef<HTMLDivElement>()
 
   const initRenderer = (): THREE.WebGLRenderer => {
     const renderer = new THREE.WebGLRenderer({
@@ -39,61 +40,82 @@ const Thumbnail2List: React.FC<ItemsTypes> = ({ items }) => {
     return cam
   }
 
-  const onScroll = () => {
-    const Yscroll: number = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop)
-    thumbnailRef.current.scrollLeft = Yscroll
-  }
-
-  const isImage = (thumbnail: string): boolean => /(png|jpg)+$/.test(thumbnail)
-
   React.useEffect(() => {
     const renderer: THREE.WebGLRenderer = initRenderer()
 
     const camera: THREE.PerspectiveCamera = initCamera()
 
-    const geometry = new THREE.PlaneGeometry(773, 480)
-    items.map((item, key) => {
-      const texture = new THREE.TextureLoader().load(item.thumbnail)
-      const material = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture })
-      const panel = new THREE.Mesh(geometry, material)
+    const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(773, 480, 20)
+    const left: number = 1045
+    items.map((item: ItemType, key: number) => {
+      const texture: THREE.Texture = new THREE.TextureLoader().load(item.thumbnail)
+      const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture })
+      const panel: THREE.Mesh = new THREE.Mesh(geometry, material)
+      panel.position.set(left * key, 0, 0)
+      panel.rotateY(0.01)
       panels.push(panel)
+      // TweenMax.to(panel.rotation, 1, { x: 0.1, y: 0.1, repeat: -1, yoyo: true })
+      panel.userData = { path: item.link }
       scene.add(panel)
       material.dispose()
       texture.dispose()
 
-      const containerChild = document.createElement('h2')
+      const containerChild = document.createElement('div')
       containerChild.style.cssText = 'margin: 0; scroll-snap-align: start; height: 100%;'
-      container.current.appendChild(containerChild)
+      container.current && container.current.appendChild(containerChild)
     })
 
-    // document.addEventListener(
-    //   'mousedown',
-    //   (e) => {
-    //     console.log(e.clientX - window.innerWidth / 2)
-    //     console.log(-e.clientY + window.innerWidth / 2)
-    //     props.history.push('/')
-    //   },
-    //   false
-    // )
+    window.addEventListener(
+      'mousedown',
+      (event) => {
+        if (canvas.current) {
+          const mouse = new THREE.Vector2()
+          const element = document.getElementById('refcanvas')
+          const x = event.clientX - element.offsetLeft
+          const y = event.clientY - element.offsetTop
+          const w = element.offsetWidth
+          const h = element.offsetHeight
 
-    const left: number = 1045
-    container.current.addEventListener('scroll', (e) => {
-      panels.map((panel, key) => {
-        panel.position.x = -container.current.scrollTop + left * key
+          mouse.x = (x / w) * 2 - 1
+          mouse.y = -(y / h) * 2 + 1
+
+          const raycaster = new THREE.Raycaster()
+          raycaster.setFromCamera(mouse, camera)
+          const intersects = raycaster.intersectObjects(scene.children)
+          if (intersects.length > 0) {
+            history.push(intersects[0].object.userData.path)
+          }
+        }
+      },
+      false
+    )
+
+    if (container.current) {
+      const element = container.current
+      container.current.addEventListener('scroll', (e) => {
+        panels.map((panel, key) => {
+          panel.position.x = -element.scrollTop + left * key
+        })
       })
-    })
+    }
 
     renderer.setSize(window.innerWidth, window.innerHeight)
     const animate = () => {
-      requestAnimationFrame(animate)
+      animationFrameId = requestAnimationFrame(animate)
       renderer.render(scene, camera)
     }
     animate()
+    return () => {
+      cancelAnimationFrame(animationFrameId)
+      panels.map((panel) => {
+        scene.remove(panel)
+      })
+    }
   }, [])
 
   return (
     <Wrapper>
-      <Canvas ref={canvas} />
+      <Canvas id="refcanvas" ref={canvas} />
       <Container ref={container}></Container>
     </Wrapper>
   )
@@ -115,18 +137,5 @@ const Container = styled.div`
   height: 100vh; /* 任意 */
   width: 100%;
 `
-const ContainerTitle = styled.h2`
-  margin: 0;
-  scroll-snap-align: start;
-  height: 100%;
 
-  color: red;
-  font-size: 7em;
-  letter-spacing: 0.05em;
-  font-family: sans-serif;
-  font-style: italic;
-  font-weight: bold;
-`
-
-// export default withRouter(Thumbnail2List)
-export default Thumbnail2List
+export default withRouter(Thumbnail2List)
