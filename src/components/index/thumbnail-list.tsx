@@ -46,7 +46,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     const camera: THREE.PerspectiveCamera = initCamera()
 
     const geometry: THREE.BoxGeometry = new THREE.BoxGeometry(773, 480, 20)
-    const left: number = 1045
+    const left: number = container.current.clientHeight
     items.map((item: ItemType, key: number) => {
       const texture: THREE.Texture = new THREE.TextureLoader().load(item.thumbnail)
       const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture })
