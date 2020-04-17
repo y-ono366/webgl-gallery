@@ -10,5 +10,6 @@ const Wrapper = styled.div`
   left: 0;
   top: 0;
   z-index: 10;
+  background: black;
 `
 export default DetailLayout

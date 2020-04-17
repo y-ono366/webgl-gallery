@@ -32,6 +32,12 @@ module.exports = {
           name: '[path][name].[ext]',
         },
       },
+      {
+        test: /.(vert|frag)$/,
+        use: 'raw-loader',
+        include: [path.resolve(__dirname, 'src')],
+        exclude: /node_modules/,
+      },
     ],
   },
 
@@ -40,7 +46,7 @@ module.exports = {
       '@': path.resolve(__dirname, './src'),
       '#': path.resolve(__dirname, './assets'),
     },
-    extensions: ['.ts', '.js', '.tsx'],
+    extensions: ['.ts', '.js', '.tsx', '.frag', '.vert'],
   },
   devServer: {
     contentBase: './dist',
