@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom'
 import * as THREE from 'three'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { render } from 'react-dom'
-// import { TweenMax } from 'gsap'
+import { TweenMax } from 'gsap'
+import vertexSource from '@/components/glsl/thumnail.vert'
+import fragmentSource from '@/components/glsl/thumnail.frag'
 
 interface ItemsTypes extends RouteComponentProps {
   items: ItemType[]
@@ -14,10 +16,13 @@ interface ItemType {
   thumbnail: string
   link: string
 }
+interface Panel extends THREE.Mesh {
+  material: any
+}
 const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
   const scene = new THREE.Scene()
   const canvas = React.createRef<HTMLCanvasElement>()
-  const panels: THREE.Mesh[] = []
+  const panels: Panel[] = []
   const thumbnailRef = React.createRef<HTMLDivElement>()
   let animationFrameId = 0
   const container = React.createRef<HTMLDivElement>()
@@ -49,12 +54,21 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     const left: number = container.current.clientHeight
     items.map((item: ItemType, key: number) => {
       const texture: THREE.Texture = new THREE.TextureLoader().load(item.thumbnail)
-      const material: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, map: texture })
-      const panel: THREE.Mesh = new THREE.Mesh(geometry, material)
+      const material: THREE.ShaderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          uTex: { value: texture },
+          uTime: {
+            value: 0.0,
+            type: 'f',
+          },
+        },
+        vertexShader: vertexSource,
+        fragmentShader: fragmentSource,
+      })
+
+      const panel: Panel = new THREE.Mesh(geometry, material)
       panel.position.set(left * key, 0, 0)
-      panel.rotateY(0.01)
       panels.push(panel)
-      // TweenMax.to(panel.rotation, 1, { x: 0.1, y: 0.1, repeat: -1, yoyo: true })
       panel.userData = { path: item.link }
       scene.add(panel)
       material.dispose()
@@ -65,44 +79,47 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
       container.current && container.current.appendChild(containerChild)
     })
 
+    const mouse = new THREE.Vector2()
     window.addEventListener(
       'mousedown',
       (event) => {
-        if (canvas.current) {
-          const mouse = new THREE.Vector2()
-          const element = document.getElementById('refcanvas')
-          const x = event.clientX - element.offsetLeft
-          const y = event.clientY - element.offsetTop
-          const w = element.offsetWidth
-          const h = element.offsetHeight
+        const element = document.getElementById('refcanvas')
+        const x = event.clientX - element.offsetLeft
+        const y = event.clientY - element.offsetTop
+        const w = element.offsetWidth
+        const h = element.offsetHeight
 
-          mouse.x = (x / w) * 2 - 1
-          mouse.y = -(y / h) * 2 + 1
+        mouse.x = (x / w) * 2 - 1
+        mouse.y = -(y / h) * 2 + 1
 
-          const raycaster = new THREE.Raycaster()
-          raycaster.setFromCamera(mouse, camera)
-          const intersects = raycaster.intersectObjects(scene.children)
-          if (intersects.length > 0) {
-            history.push(intersects[0].object.userData.path)
-          }
+        const raycaster = new THREE.Raycaster()
+        raycaster.setFromCamera(mouse, camera)
+        const intersects = raycaster.intersectObjects(scene.children)
+        if (intersects.length > 0) {
+          history.push(intersects[0].object.userData.path)
         }
       },
       false
     )
 
-    if (container.current) {
-      const element = container.current
-      container.current.addEventListener('scroll', (e) => {
-        panels.map((panel, key) => {
-          panel.position.x = -element.scrollTop + left * key
-        })
+    const centerObjId: number = 0
+    const element = container.current
+
+    const clock = new THREE.Clock()
+    container.current.addEventListener('scroll', (e) => {
+      panels.map((panel, key) => {
+        panel.position.x = -element.scrollTop + left * key
       })
-    }
+    })
 
     renderer.setSize(window.innerWidth, window.innerHeight)
     const animate = () => {
+      const time = clock.getElapsedTime()
       animationFrameId = requestAnimationFrame(animate)
       renderer.render(scene, camera)
+      panels.map((panel, key) => {
+        panel.material.uniforms.uTime.value = time
+      })
     }
     animate()
     return () => {
@@ -136,6 +153,13 @@ const Container = styled.div`
   scroll-snap-type: y mandatory;
   height: 100vh; /* 任意 */
   width: 100%;
+
+  -ms-overflow-style: none; /* IE, Edge 対応 */
+  scrollbar-width: none; /* Firefox 対応 */
+  &::-webkit-scrollbar {
+    /* Chrome, Safari 対応 */
+    display: none;
+  }
 `
 
 export default withRouter(ThumbnailList)

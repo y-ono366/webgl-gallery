@@ -1,6 +1,7 @@
 import * as React from 'react'
 import DetailLayout from '@/components/common/detail-layout'
 import * as THREE from 'three'
+import { TweenMax } from 'gsap'
 
 const SampleBox: React.FC = () => {
   const scene = new THREE.Scene()
@@ -25,6 +26,35 @@ const SampleBox: React.FC = () => {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.render(scene, camera)
 
+    const mouse = new THREE.Vector2()
+    window.addEventListener(
+      'mousemove',
+      (event) => {
+        const element = canvas.current
+        const x = event.clientX - element.offsetLeft
+        const y = event.clientY - element.offsetTop
+        const w = element.offsetWidth
+        const h = element.offsetHeight
+
+        mouse.x = (x / w) * 2 - 1
+        mouse.y = -(y / h) * 2 + 1
+
+        const raycaster = new THREE.Raycaster()
+        raycaster.setFromCamera(mouse, camera)
+
+        const intersects = raycaster.intersectObjects(scene.children)
+        if (intersects.length > 0) {
+          TweenMax.to(mesh.scale, 1, {
+            x: 2,
+          })
+        } else {
+          TweenMax.to(mesh.scale, 1, {
+            x: 0.4,
+          })
+        }
+      },
+      false
+    )
     const animate = () => {
       animateFrameId = requestAnimationFrame(animate)
 

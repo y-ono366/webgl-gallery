@@ -9,12 +9,12 @@ const Usestrict: React.FC = () => {
 
   return (
     <DetailLayout>
-      <Img src={require('#/usestrict.svg').default}></Img>
+      <Img type="image/svg+xml" data={require('#/usestrict.svg').default} width="1000" height="1610" />
     </DetailLayout>
   )
 }
 
-const Img = styled.img`
+const Img = styled.object`
   position: absolute;
   top: 0;
   right: 0;

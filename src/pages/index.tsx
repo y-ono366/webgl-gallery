@@ -21,7 +21,7 @@ const items = [
   },
   {
     alt: 'usestrict',
-    thumbnail: require('#/thumbnails/usestrict.png').default,
+    thumbnail: require('#/thumbnails/image/usestrict.png').default,
     link: '/usestrict',
   },
   {
