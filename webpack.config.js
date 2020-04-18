@@ -33,9 +33,8 @@ module.exports = {
         },
       },
       {
-        test: /.(vert|frag)$/,
-        use: 'raw-loader',
-        include: [path.resolve(__dirname, 'src')],
+        test: /\.(glsl|vs|fs|vert|frag)$/,
+        use: ['raw-loader', 'glslify-loader'],
         exclude: /node_modules/,
       },
     ],
