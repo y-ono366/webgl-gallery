@@ -5,8 +5,8 @@ import * as THREE from 'three'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { render } from 'react-dom'
 import { TweenMax } from 'gsap'
-import vertexSource from '@/components/glsl/thumnail.vert'
-import fragmentSource from '@/components/glsl/thumnail.frag'
+import vertexSource from '@/components/glsl/thumbnail.vert'
+import fragmentSource from '@/components/glsl/thumbnail.frag'
 
 interface ItemsTypes extends RouteComponentProps {
   items: ItemType[]
