@@ -4,44 +4,44 @@ import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
-    thumbnail: require('#/thumbnails/image/loading.png').default,
+    thumbnail: require('#/images/loading.png').default,
     link: '/loading',
   },
   {
-    thumbnail: require('#/thumbnails/image/circle.png').default,
+    thumbnail: require('#/images/circle.png').default,
     link: '/circle',
   },
   {
-    thumbnail: require('#/thumbnails/image/particle.png').default,
+    thumbnail: require('#/images/particle.png').default,
     link: '/particle',
   },
   {
-    thumbnail: require('#/thumbnails/image/usestrict2.png').default,
+    thumbnail: require('#/images/usestrict2.png').default,
     link: '/usestrict2',
   },
   {
     alt: 'usestrict',
-    thumbnail: require('#/thumbnails/image/usestrict.png').default,
+    thumbnail: require('#/images/usestrict.png').default,
     link: '/usestrict',
   },
   {
-    thumbnail: require('#/thumbnails/image/fragmentshader.png').default,
+    thumbnail: require('#/images/fragmentshader.png').default,
     link: '/fragmentshader',
   },
   {
-    thumbnail: require('#/thumbnails/image/slash.png').default,
+    thumbnail: require('#/images/slash.png').default,
     link: '/slash',
   },
   {
-    thumbnail: require('#/thumbnails/image/lines.png').default,
+    thumbnail: require('#/images/lines.png').default,
     link: '/lines',
   },
   {
-    thumbnail: require('#/thumbnails/image/samplebox2.png').default,
+    thumbnail: require('#/images/samplebox2.png').default,
     link: '/samplebox2',
   },
   {
-    thumbnail: require('#/thumbnails/image/samplebox.png').default,
+    thumbnail: require('#/images/samplebox.png').default,
     link: '/samplebox',
   },
 ]

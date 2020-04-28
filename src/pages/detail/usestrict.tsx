@@ -9,7 +9,7 @@ const Usestrict: React.FC = () => {
 
   return (
     <DetailLayout>
-      <Img type="image/svg+xml" data={require('#/usestrict.svg').default} width="1000" height="1610" />
+      <Img type="image/svg+xml" data={require('#/images/usestrict.svg').default} width="1000" height="1610" />
     </DetailLayout>
   )
 }
