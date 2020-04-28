@@ -1,19 +1,20 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-const Index = React.lazy(() => import('@/pages/index'))
-const Particle = React.lazy(() => import('@/pages/detail/particle'))
-const SampleBox = React.lazy(() => import('@/pages/detail/samplebox'))
-const SampleBox2 = React.lazy(() => import('@/pages/detail/samplebox2'))
-const Lines = React.lazy(() => import('@/pages/detail/lines'))
-const Slash = React.lazy(() => import('@/pages/detail/slash'))
-const Usestrict = React.lazy(() => import('@/pages/detail/usestrict'))
-const Usestrict2 = React.lazy(() => import('@/pages/detail/usestrict2'))
-const Circle = React.lazy(() => import('@/pages/detail/circle'))
-const FragmentShader = React.lazy(() => import('@/pages/detail/fragmentshader'))
-const Glitch = React.lazy(() => import('@/pages/detail/glitch'))
-const Loading = React.lazy(() => import('@/pages/detail/loading'))
-const Test = React.lazy(() => import('@/pages/detail/test'))
+import Index from '@/pages/index'
+import Particle from '@/pages/detail/particle'
+import SampleBox from '@/pages/detail/samplebox'
+import SampleBox2 from '@/pages/detail/samplebox2'
+import Lines from '@/pages/detail/lines'
+import Slash from '@/pages/detail/slash'
+import Usestrict from '@/pages/detail/usestrict'
+import Usestrict2 from '@/pages/detail/usestrict2'
+import Circle from '@/pages/detail/circle'
+import FragmentShader from '@/pages/detail/fragmentshader'
+import Glitch from '@/pages/detail/glitch'
+import Loading from '@/pages/detail/loading'
+import Test from '@/pages/detail/test'
+import MenuPage from '@/components/common/menu'
 
 ReactDOM.render(
   <HashRouter>
