@@ -13,7 +13,6 @@ import Circle from '@/pages/detail/circle'
 import FragmentShader from '@/pages/detail/fragmentshader'
 import Glitch from '@/pages/detail/glitch'
 import Loading from '@/pages/detail/loading'
-import Test from '@/pages/detail/test'
 import MenuPage from '@/components/common/menu'
 
 ReactDOM.render(
@@ -32,7 +31,6 @@ ReactDOM.render(
         <Route exact path="/fragmentshader" component={FragmentShader} />
         <Route exact path="/glitch" component={Glitch} />
         <Route exact path="/loading" component={Loading} />
-        <Route exact path="/test" component={Test} />
         <Redirect to="/" />
       </Switch>
     </React.Suspense>

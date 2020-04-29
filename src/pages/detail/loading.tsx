@@ -161,7 +161,7 @@ const Loading = withRouter((props) => {
 const TextEl = styled.div`
   @font-face {
     font-family: 'zouver2';
-    src: url('../../assets/zouver2.ttf');
+    src: url('../../assets/fonts/zouver2.ttf');
   }
 `
 

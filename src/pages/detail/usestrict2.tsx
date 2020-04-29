@@ -61,7 +61,7 @@ const Usestrict2: React.FC = () => {
 const Text = styled.div`
   @font-face {
     font-family: 'ultimatemetal';
-    src: url('../../assets/ultimate-black.ttf');
+    src: url('../../assets/fonts/ultimate-black.ttf');
   }
 `
 export default Usestrict2

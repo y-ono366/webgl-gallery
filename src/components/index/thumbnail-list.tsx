@@ -76,8 +76,6 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     window.addEventListener(
       'mousedown',
       (event) => {
-        // const element = canvas.current
-        // console.log(element)
         const element = document.getElementById('refcanvas')
         const x = event.clientX - element.offsetLeft
         const y = event.clientY - element.offsetTop
@@ -90,7 +88,6 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
         const raycaster = new THREE.Raycaster()
         raycaster.setFromCamera(mouse, camera)
         const intersects = raycaster.intersectObjects(scene.children)
-        console.log(intersects)
         if (intersects.length > 0) {
           history.push(intersects[0].object.userData.path)
         }
@@ -136,7 +133,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     position: fixed;
     left: 0%;
     top: 50%;
-    height: 2px;
+    height: 1px;
     background-color: #b3b3b3;
     width: ${state.widthStyle}%;
   `
@@ -185,7 +182,7 @@ const Line = styled.div`
   position: fixed;
   top: 50%;
   left: 0%;
-  height: 2px;
+  height: 1px;
   background-color: #333330;
   width: 100%;
 `
