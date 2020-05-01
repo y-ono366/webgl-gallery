@@ -4,55 +4,47 @@ import * as THREE from 'three'
 import threeIf from '@/interfaces/three'
 
 const Menu: React.FC = () => {
-  let animateFrameId = 0
-
-  const scene = new THREE.Scene()
-  const canvas = React.createRef<HTMLCanvasElement>()
-
-  React.useEffect(() => {
-    const three = new threeIf(canvas.current, window.innerHeight, window.innerWidth)
-    const renderer: THREE.WebGLRenderer = three.initRenderer()
-    const camera = three.initOrthCamera()
-
-    // const geometry = new THREE.BoxGeometry(370, 230, 300)
-    // const material = new THREE.MeshNormalMaterial()
-    // const box = new THREE.Mesh(geometry, material)
-    // box.position.set(0, 0, -400)
-    // scene.add(box)
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x0000ff,
-    })
-
-    const points = []
-    points.push(new THREE.Vector3(-200, 0, 0))
-    points.push(new THREE.Vector3(0, 200, 0))
-    points.push(new THREE.Vector3(200, 0, 0))
-
-    const geometry = new THREE.BufferGeometry().setFromPoints(points)
-
-    const line = new THREE.Line(geometry, material)
-    line.position.set(0, 0, -5)
-    scene.add(line)
-
-    renderer.render(scene, camera)
-    const animate = () => {
-      animateFrameId = requestAnimationFrame(animate)
-      renderer.render(scene, camera)
-    }
-    animate()
-
-    return () => {
-      cancelAnimationFrame(animateFrameId)
-    }
-  }, [])
-  return <Canvas ref={canvas} />
+  return (
+    <Wrapper>
+      <SvgMenu>
+        <rect className="border1 border" y="22.52" width="44" height="4.26" rx="1" fill="#1B1B1B" />
+        <rect className="border2 border" y="11.26" width="44" height="4.26" rx="1" fill="#1B1B1B" />
+        <rect className="border3 border" width="44" height="4.26" rx="1" fill="#1B1B1B" />
+      </SvgMenu>
+    </Wrapper>
+  )
 }
-const Canvas = styled.canvas`
+const Wrapper = styled.div`
   position: fixed;
   top: 0px;
   right: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 100;
+  z-index: 9;
+  width: 55px;
+  height: 65px;
+  background-color: #f0f0f0;
+  text-align: center;
+  vertical-align: middle;
 `
+
+const SvgMenu = styled.svg.attrs({
+  width: '44',
+  height: '20',
+  viewBox: '0 0 44 27',
+  fill: '#0b0b0b',
+})`
+  margin-top: 23px;
+  .border {
+    transition: 200ms all ease;
+  }
+  &:hover {
+    .border1 {
+      transform-origin: bottom left;
+      transform: translate(0px, 0px) rotate(-60deg);
+    }
+    .border2 {
+      transform: translate(0px, 5px);
+    }
+  }
+`
+
 export default Menu

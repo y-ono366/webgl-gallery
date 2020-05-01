@@ -134,7 +134,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     left: 0%;
     top: 50%;
     height: 1px;
-    background-color: #b3b3b3;
+    background-color: #f0f0f0;
     width: ${state.widthStyle}%;
   `
   return (

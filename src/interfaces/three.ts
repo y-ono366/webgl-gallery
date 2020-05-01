@@ -38,7 +38,7 @@ class ThreeInterface {
       canvas: this.canvas,
     })
     renderer.setSize(this.innerWidth, this.innerHeight)
-    renderer.setClearColor(0x101010, 1)
+    renderer.setClearColor(0x0b0b0b, 1)
     return renderer
   }
 }

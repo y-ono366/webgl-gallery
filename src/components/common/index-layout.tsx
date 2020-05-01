@@ -17,13 +17,15 @@ const Footer = styled.div`
   position: fixed;
   right: 0%;
   bottom: 0%;
-  height: 50px;
-  width: 400px;
-  margin-right: 20px;
-  margin-bottom: 10px;
-  color: #c1c1c1c1;
+  background-color: #f0f0f0;
+  height: 35px;
+  width: 380px;
 `
 const Author = styled.p`
-  text-align: right;
+  margin: 0px;
+  text-align: left;
+  margin-left: 15px;
+  line-height: 35px;
+  font-size: 15px;
 `
 export default IndexLayout
