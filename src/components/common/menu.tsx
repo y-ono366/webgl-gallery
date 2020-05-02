@@ -1,18 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import Popup from '@/components/common/popup'
-// import { Transition } from 'react-transition-group'
 
-interface StateType {
-  showMenu: boolean
-}
 const Menu: React.FC = () => {
-  const toggleMenu = (): void => {
-    setState({
-      showMenu: !state.showMenu,
-    })
-  }
-  const [state, setState] = React.useState<StateType>({ showMenu: false })
+  const [showMenu, setShowMenu] = React.useState(false)
 
   const Icon = styled.svg`
     margin-top: 13px;
@@ -37,14 +28,14 @@ const Menu: React.FC = () => {
   `
   return (
     <Wrapper>
-      <IconWrapper onClick={() => toggleMenu()}>
+      <IconWrapper onClick={() => setShowMenu(!showMenu)}>
         <Icon width="48" height="42" viewBox="0 0 48 42" fill="#0b0b0b">
           <rect className="border3 border" x="2" y="8.5" width="44" height="4.26" rx="1" fill="#1B1B1B" />
           <rect className="border2 border" x="2" y="19.76" width="44" height="4.26" rx="1" fill="#1B1B1B" />
           <rect className="border1 border" x="2" y="31.02" width="44" height="4.26" rx="1" fill="#1B1B1B" />
         </Icon>
       </IconWrapper>
-      <Popup showMenu={state.showMenu} />
+      <Popup showMenu={showMenu} />
     </Wrapper>
   )
 }

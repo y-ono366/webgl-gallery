@@ -7,13 +7,13 @@ interface Types {
 }
 const Popup: React.FC<Types> = ({ showMenu }) => {
   const transitionStyles = {
-    entering: { opacity: 0.9 },
+    entering: { opacity: 0 },
     entered: { opacity: 0.9 },
     exiting: { opacity: 0 },
     exited: { opacity: 0 },
   }
   return (
-    <Transition in={showMenu} timeout={200}>
+    <Transition in={showMenu} timeout={200} unmountOnExit={true} appear={true}>
       {(state) => (
         <Wrapper style={transitionStyles[state]}>
           <ItemList>
@@ -52,9 +52,7 @@ const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   background: black;
-
   transition: opacity 200ms ease-in-out;
-  opacity: 0;
 `
 const ItemList = styled.div`
   display: flex;
