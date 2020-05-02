@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Transition } from 'react-transition-group'
 
 interface Types {
-  showMenu: boolean
+  isShow: boolean
+  toggleMenu: Function
 }
-const Popup: React.FC<Types> = ({ showMenu }) => {
+const Popup: React.FC<Types> = ({ isShow, toggleMenu }) => {
   const transitionStyles = {
     entering: { opacity: 0 },
     entered: { opacity: 0.9 },
@@ -13,9 +14,9 @@ const Popup: React.FC<Types> = ({ showMenu }) => {
     exited: { opacity: 0 },
   }
   return (
-    <Transition in={showMenu} timeout={200} unmountOnExit={true} appear={true}>
+    <Transition in={isShow} timeout={200} unmountOnExit={true} appear={true}>
       {(state) => (
-        <Wrapper style={transitionStyles[state]}>
+        <Wrapper style={transitionStyles[state]} onClick={() => toggleMenu()}>
           <ItemList>
             <Item href="https://twitter.com/y_ono366">
               <ItemBox />
