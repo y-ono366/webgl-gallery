@@ -73,7 +73,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     })
 
     const mouse = new THREE.Vector2()
-    window.addEventListener(
+    container.current.addEventListener(
       'mousedown',
       (event) => {
         const element = document.getElementById('refcanvas')
