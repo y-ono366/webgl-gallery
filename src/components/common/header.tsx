@@ -13,9 +13,7 @@ const Header: React.FC = () => (
   </div>
 )
 
-const Left = styled.div`
-  //z-index: 9;
-`
+const Left = styled.div``
 const Right = styled.div`
   position: fixed;
   right: 0px;
