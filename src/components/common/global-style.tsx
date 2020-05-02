@@ -5,6 +5,6 @@ export default createGlobalStyle`
     src: url(https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200&display=swap);
   }
   body {
-      font-family: 'notoserif', serif;
+    font-family: 'Noto Serif JP', serif;
   }
 `
