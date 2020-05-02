@@ -1,33 +1,47 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { Transition } from 'react-transition-group'
 
-const Popup: React.FC = () => {
+interface Types {
+  showMenu: boolean
+}
+const Popup: React.FC<Types> = ({ showMenu }) => {
+  const transitionStyles = {
+    entering: { opacity: 0.9 },
+    entered: { opacity: 0.9 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  }
   return (
-    <Wrapper>
-      <ItemList>
-        <Item href="https://twitter.com/y_ono366">
-          <ItemBox />
-          <ItemSec>
-            <ItemHead>01-twitter</ItemHead>
-            <ItemText>y_ono366</ItemText>
-          </ItemSec>
-        </Item>
-        <Item href="https://github.com/y-ono366">
-          <ItemBox />
-          <ItemSec>
-            <ItemHead>02-github</ItemHead>
-            <ItemText>y-ono366</ItemText>
-          </ItemSec>
-        </Item>
-        <Item href="mailto:yusuke@ohno.systems">
-          <ItemBox />
-          <ItemSec>
-            <ItemHead>03-email</ItemHead>
-            <ItemText>ohno.systems</ItemText>
-          </ItemSec>
-        </Item>
-      </ItemList>
-    </Wrapper>
+    <Transition in={showMenu} timeout={200}>
+      {(state) => (
+        <Wrapper style={transitionStyles[state]}>
+          <ItemList>
+            <Item href="https://twitter.com/y_ono366">
+              <ItemBox />
+              <ItemSec>
+                <ItemHead>01-twitter</ItemHead>
+                <ItemText>y_ono366</ItemText>
+              </ItemSec>
+            </Item>
+            <Item href="https://github.com/y-ono366">
+              <ItemBox />
+              <ItemSec>
+                <ItemHead>02-github</ItemHead>
+                <ItemText>y-ono366</ItemText>
+              </ItemSec>
+            </Item>
+            <Item href="mailto:yusuke@ohno.systems">
+              <ItemBox />
+              <ItemSec>
+                <ItemHead>03-email</ItemHead>
+                <ItemText>ohno.systems</ItemText>
+              </ItemSec>
+            </Item>
+          </ItemList>
+        </Wrapper>
+      )}
+    </Transition>
   )
 }
 const Wrapper = styled.div`
@@ -38,7 +52,9 @@ const Wrapper = styled.div`
   height: 100%;
   width: 100%;
   background: black;
-  opacity: 0.9;
+
+  transition: opacity 200ms ease-in-out;
+  opacity: 0;
 `
 const ItemList = styled.div`
   display: flex;

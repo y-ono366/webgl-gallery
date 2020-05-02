@@ -44,7 +44,7 @@ const Menu: React.FC = () => {
           <rect className="border1 border" x="2" y="31.02" width="44" height="4.26" rx="1" fill="#1B1B1B" />
         </Icon>
       </IconWrapper>
-      {state.showMenu && <Popup />}
+      <Popup showMenu={state.showMenu} />
     </Wrapper>
   )
 }
