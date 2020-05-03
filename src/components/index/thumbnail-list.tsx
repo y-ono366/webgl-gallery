@@ -40,7 +40,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
 
     const camera: THREE.PerspectiveCamera = three.initPerCamera()
 
-    const geometry = new THREE.PlaneGeometry(370, 230)
+    const geometry = new THREE.BoxGeometry(370, 230, 10)
     const left = 210
     let start = -500
     items.map((item: ItemType, key: number) => {
@@ -90,6 +90,44 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length > 0) {
           history.push(intersects[0].object.userData.path)
+        }
+      },
+      false
+    )
+
+    container.current.addEventListener(
+      'mousemove',
+      (event) => {
+        const element = document.getElementById('refcanvas')
+        const x = event.clientX - element.offsetLeft
+        const y = event.clientY - element.offsetTop
+        const w = element.offsetWidth
+        const h = element.offsetHeight
+
+        mouse.x = (x / w) * 2 - 1
+        mouse.y = -(y / h) * 2 + 1
+
+        const raycaster = new THREE.Raycaster()
+        raycaster.setFromCamera(mouse, camera)
+        const intersects = raycaster.intersectObjects(scene.children)
+        if (intersects.length > 0) {
+          TweenMax.to(intersects[0].object.position, 0.5, {
+            z: 25,
+          })
+
+          TweenMax.to(intersects[0].object.rotation, 0.5, {
+            x: 0.15,
+          })
+        } else {
+          panels.map((panel, key) => {
+            TweenMax.to(panel.position, 0.8, {
+              z: 0,
+            })
+
+            TweenMax.to(panel.rotation, 0.8, {
+              x: 0,
+            })
+          })
         }
       },
       false
