@@ -9,17 +9,18 @@ const Menu: React.FC = () => {
   const Icon = styled.svg`
     margin-top: 13px;
     rect {
-      transition: width 200ms ease;
+      transform-origin: right;
+      transition: transform 200ms ease;
     }
     &:hover {
       .border1 {
-        width: 30px;
+        transform: scale(0.6, 1);
       }
       .border2 {
-        width: 38px;
+        transform: scale(0.75, 1);
       }
       .border3 {
-        width: 44px;
+        transform: scale(0.9, 1);
       }
     }
   `
@@ -49,6 +50,7 @@ const Wrapper = styled.div`
   .iconanim-enter-done,
   .iconanim-exit,
   .iconanim-exit-active {
+    pointer-events: none;
     rect {
       transform-origin: center;
       transition: 200ms all ease;
@@ -56,7 +58,7 @@ const Wrapper = styled.div`
     .border1,
     .border2,
     .border3 {
-      width: 44px;
+      transform: scale(1, 1);
     }
     .border1 {
       transform: translate(-21px, -7px) rotate(-60deg);
@@ -68,13 +70,14 @@ const Wrapper = styled.div`
       transform: translate(1px, 4px) rotate(60deg);
     }
   }
+
   .iconanim-enter-done {
     pointer-events: none;
   }
 
   .iconanim-exit-done {
     rect {
-      transform-origin: center;
+      transform-origin: right;
       transition: 200ms all ease;
     }
   }
