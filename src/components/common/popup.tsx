@@ -84,7 +84,7 @@ const Item = styled.a.attrs({
 const ItemBox = styled.div.attrs({
   className: 'ItemBox',
 })`
-  transition: 280ms all cubic-bezier(0.22, 1, 0.36, 1);
+  transition: 300ms all cubic-bezier(0.1, 0.59, 0.41, 0.95);
   width: 0px;
   height: 65px;
   position: absolute;
