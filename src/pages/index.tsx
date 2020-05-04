@@ -4,6 +4,10 @@ import ThumbnailList from '@/components/index/thumbnail-list'
 
 const items = [
   {
+    thumbnail: require('#/images/cylinder.png').default,
+    link: '/cylinder',
+  },
+  {
     thumbnail: require('#/images/loading.png').default,
     link: '/loading',
   },
