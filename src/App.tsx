@@ -15,6 +15,7 @@ import FragmentShader from '@/pages/detail/fragmentshader'
 import Glitch from '@/pages/detail/glitch'
 import Loading from '@/pages/detail/loading'
 import Mobile from '@/components/common/mobile'
+import Cylinder from '@/pages/detail/cylinder'
 ReactDOM.render(
   <HashRouter>
     <GlobalStyle />
@@ -34,6 +35,7 @@ ReactDOM.render(
           <Route exact path="/fragmentshader" component={FragmentShader} />
           <Route exact path="/glitch" component={Glitch} />
           <Route exact path="/loading" component={Loading} />
+          <Route exact path="/cylinder" component={Cylinder} />
           <Redirect to="/" />
         </Switch>
       </React.Suspense>
