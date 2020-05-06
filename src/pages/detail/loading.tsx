@@ -91,8 +91,10 @@ const Loading = withRouter((props) => {
       clearInterval(loopIntervalid)
       animate()
     }
-    Text.text = text[textId]
-    textId++
+    new FontFaceObserver('zouver2').load().then(function (fontface) {
+      Text.text = text[textId]
+      textId++
+    })
   }
 
   const loadText = async (): Promise<void> => {
@@ -105,15 +107,6 @@ const Loading = withRouter((props) => {
     app.stage.addChild(Text)
   }
 
-  const sleep = (time) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, time)
-    })
-  }
-
-  let parcent: number = 0
   const animate = (): void => {
     TweenMax.to(NText, 1, { alpha: 0, ease: 'power3' })
     TweenMax.to(Text, 1, { alpha: 0, ease: 'power3' })

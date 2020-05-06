@@ -29,9 +29,10 @@ const Usestrict2: React.FC = () => {
     app.renderer.autoDensity = true
     app.stage.interactive = true
 
+    let richText: PIXI.Text
     new FontFaceObserver('ultimatemetal').load().then(() => {
       PIXI.TextMetrics.BASELINE_SYMBOL += ' U T'
-      const richText = new PIXI.Text(' USESTRICT ', style)
+      richText = new PIXI.Text(' USESTRICT ', style)
       richText.x = window.innerWidth / 2
       richText.y = window.innerHeight / 2
       richText.anchor.set(0.5)
@@ -40,7 +41,10 @@ const Usestrict2: React.FC = () => {
       app.ticker.add(tick)
     })
 
-    return () => app.destroy(true)
+    return () => {
+      richText.destroy()
+      app.destroy(true)
+    }
   }, [])
   const tick = () => {
     let arr: string[] = []

@@ -40,8 +40,8 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
 
     const camera: THREE.PerspectiveCamera = three.initPerCamera()
 
-    const geometry = new THREE.BoxGeometry(370, 230, 10)
-    const left = 210
+    const geometry = new THREE.BoxGeometry(290, 180, 10)
+    const left = 170
     let start = -500
     items.map((item: ItemType, key: number) => {
       const texture: THREE.Texture = new THREE.TextureLoader().load(item.thumbnail)
@@ -60,9 +60,9 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
       const panel: Panel = new THREE.Mesh(geometry, material)
       canvas.current.height
       if (key % 2 == 0) {
-        panel.position.set(start, 150, 0)
+        panel.position.set(start, 130, 0)
       } else {
-        panel.position.set(start, -150, 0)
+        panel.position.set(start, -130, 0)
       }
       panels.push(panel)
       panel.userData = { path: item.link }
