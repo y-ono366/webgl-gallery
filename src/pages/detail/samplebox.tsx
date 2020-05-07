@@ -27,10 +27,10 @@ const SampleBox: React.FC = () => {
     renderer.render(scene, camera)
 
     const mouse = new THREE.Vector2()
-    window.addEventListener(
+    canvas.current.addEventListener(
       'mousemove',
       (event) => {
-        const element = canvas.current
+        const element = document.getElementById('canvasref')
         const x = event.clientX - element.offsetLeft
         const y = event.clientY - element.offsetTop
         const w = element.offsetWidth
@@ -75,7 +75,7 @@ const SampleBox: React.FC = () => {
 
   return (
     <DetailLayout>
-      <canvas ref={canvas} />
+      <canvas ref={canvas} id="canvasref" />
     </DetailLayout>
   )
 }

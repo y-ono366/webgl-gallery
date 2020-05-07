@@ -88,9 +88,9 @@ const ItemBox = styled.div.attrs({
   width: 0px;
   height: 65px;
   position: absolute;
-  background: -moz-linear-gradient(top, #fff, #ffc778 30%, #f89174 60%, #748af8);
-  background: -webkit-linear-gradient(top, #fff, #ffc778 30%, #f89174 60%, #748af8);
-  background: linear-gradient(to bottom, #fff, #ffc778 30%, #f89174 60%, #748af8);
+  background: -moz-linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(22, 44, 59, 1) 25%, rgba(112, 192, 192, 1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(22, 44, 59, 1) 25%, rgba(112, 192, 192, 1) 100%);
+  background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(22, 44, 59, 1) 25%, rgba(112, 192, 192, 1) 100%);
 `
 const ItemHead = styled.p`
   margin: 0;

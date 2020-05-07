@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
+    "composite": true,
+    "declaration": true,
     "sourceMap": true,
     "lib": ["dom", "es2015.promise", "es5"],
     "target": "es5",
