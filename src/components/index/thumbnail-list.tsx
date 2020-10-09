@@ -1,7 +1,19 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import * as THREE from 'three'
+import {
+  Mesh,
+  Scene,
+  BoxGeometry,
+  WebGLRenderer,
+  PerspectiveCamera,
+  Vector2,
+  Raycaster,
+  TextureLoader,
+  ShaderMaterial,
+  Texture,
+  Clock,
+} from 'three'
 import { RouteComponentProps, withRouter } from 'react-router'
 import { render } from 'react-dom'
 import { TweenMax } from 'gsap'
@@ -25,7 +37,7 @@ interface StateType {
   widthStyle: number
 }
 const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
-  const scene = new THREE.Scene()
+  const scene = new Scene()
   const canvas = React.createRef<HTMLCanvasElement>()
   const panels: Panel[] = []
   const thumbnailRef = React.createRef<HTMLDivElement>()
@@ -36,16 +48,16 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
 
   React.useEffect(() => {
     const three = new threeIf(canvas.current, window.innerHeight, window.innerWidth)
-    const renderer: THREE.WebGLRenderer = three.initRenderer()
+    const renderer: WebGLRenderer = three.initRenderer()
 
-    const camera: THREE.PerspectiveCamera = three.initPerCamera()
+    const camera: PerspectiveCamera = three.initPerCamera()
 
-    const geometry = new THREE.BoxGeometry(290, 180, 10)
+    const geometry = new BoxGeometry(290, 180, 10)
     const left = 170
     let start = -500
     items.map((item: ItemType, key: number) => {
-      const texture: THREE.Texture = new THREE.TextureLoader().load(item.thumbnail)
-      const material: THREE.ShaderMaterial = new THREE.ShaderMaterial({
+      const texture: Texture = new TextureLoader().load(item.thumbnail)
+      const material: ShaderMaterial = new ShaderMaterial({
         uniforms: {
           uTex: { value: texture },
           uTime: {
@@ -57,7 +69,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
         fragmentShader: fragmentSource,
       })
 
-      const panel: Panel = new THREE.Mesh(geometry, material)
+      const panel: Panel = new Mesh(geometry, material)
       canvas.current.height
       if (key % 2 == 0) {
         panel.position.set(start, 130, 0)
@@ -72,7 +84,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
       start = left + start
     })
 
-    const mouse = new THREE.Vector2()
+    const mouse = new Vector2()
     container.current.addEventListener(
       'mousedown',
       (event) => {
@@ -85,7 +97,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
         mouse.x = (x / w) * 2 - 1
         mouse.y = -(y / h) * 2 + 1
 
-        const raycaster = new THREE.Raycaster()
+        const raycaster = new Raycaster()
         raycaster.setFromCamera(mouse, camera)
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length > 0) {
@@ -107,7 +119,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
         mouse.x = (x / w) * 2 - 1
         mouse.y = -(y / h) * 2 + 1
 
-        const raycaster = new THREE.Raycaster()
+        const raycaster = new Raycaster()
         raycaster.setFromCamera(mouse, camera)
         const intersects = raycaster.intersectObjects(scene.children)
         if (intersects.length > 0) {
@@ -136,7 +148,7 @@ const ThumbnailList: React.FC<ItemsTypes> = ({ items, history }) => {
     const centerObjId: number = 0
     const element = container.current
 
-    const clock = new THREE.Clock()
+    const clock = new Clock()
     let parcent = 0
     container.current.addEventListener('scroll', (e) => {
       parcent = (element.scrollTop / (element.scrollHeight - element.offsetHeight)) * 100

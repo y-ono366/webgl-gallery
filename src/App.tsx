@@ -16,6 +16,8 @@ import Glitch from '@/pages/detail/glitch'
 import Loading from '@/pages/detail/loading'
 import Mobile from '@/components/common/mobile'
 import Cylinder from '@/pages/detail/cylinder'
+import Twelve from '@/pages/detail/twelve'
+import Thirteen from '@/pages/detail/thirteen'
 import { CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 
@@ -57,6 +59,8 @@ const routes = [
   { path: '/glitch', Component: Glitch },
   { path: '/loading', Component: Loading },
   { path: '/cylinder', Component: Cylinder },
+  { path: '/twelve', Component: Twelve },
+  { path: '/thirteen', Component: Thirteen },
 ]
 ReactDOM.render(
   <HashRouter>
