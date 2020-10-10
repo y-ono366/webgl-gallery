@@ -10,6 +10,8 @@ import {
   Vector2,
   Group,
   Object3D,
+  AnimationMixer,
+  Clock,
 } from 'three'
 import { TweenMax } from 'gsap'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
@@ -22,8 +24,24 @@ const geometry = new BoxGeometry(1, 1, 1)
 const material = new MeshNormalMaterial()
 let animateFrameId = 0
 let model: Object3D = null
+const mixers = []
 
 const Twelve: React.FC = () => {
+  const getMesh = (_o: Object3D) => {
+    let refO = null
+
+    if (_o.type.toLowerCase().indexOf('skinnedmesh') > -1) {
+      return _o
+    }
+
+    for (let i = 0; i < _o.children.length; i++) {
+      refO = getMesh(_o.children[i])
+      if (refO) {
+        break
+      }
+    }
+    return refO
+  }
   React.useEffect(() => {
     const renderer = new WebGLRenderer({
       antialias: true,
@@ -31,15 +49,30 @@ const Twelve: React.FC = () => {
     })
     const loader = new GLTFLoader()
     loader.load(
-      'http://localhost:8080/assets/human.glb',
+      'http://localhost:8080/assets/human_animation.glb',
       function (gltf) {
-        model = gltf.scene.children[2] as Object3D
+        model = gltf.scene as Object3D
         model.position.y = -3
         scene.add(model)
+
+        const animations = gltf.animations
+
+        if (animations && animations.length) {
+          const meshes = getMesh(model)
+
+          let mixer = new AnimationMixer(meshes)
+          for (let m = 0; m < animations.length; m++) {
+            mixer.clipAction(animations[m]).play()
+          }
+          mixers.push(mixer)
+          if (mixers) {
+            mixer = mixers[0]
+          }
+        }
         animate()
       },
       function (onprogress) {
-        console.log('progress ')
+        console.log('progress')
         console.log(onprogress)
       },
       function (error) {
@@ -52,14 +85,18 @@ const Twelve: React.FC = () => {
     light.position.set(0, 0, 10)
     scene.add(light)
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.render(scene, camera)
-    const mouse = new Vector2()
-    renderer.render(scene, camera)
+
+    const clock = new Clock()
     const animate = () => {
       animateFrameId = requestAnimationFrame(animate)
 
-      // model.rotation.x += 0.02
-      model.rotation.z += 0.01
+      model.rotation.y += 0.01
+
+      if (mixers) {
+        for (let i = 0; i < mixers.length; i++) {
+          mixers[i].update(clock.getDelta())
+        }
+      }
 
       renderer.render(scene, camera)
     }
