@@ -18,6 +18,7 @@ import Mobile from '@/components/common/mobile'
 import Cylinder from '@/pages/detail/cylinder'
 import Twelve from '@/pages/detail/twelve'
 import Thirteen from '@/pages/detail/thirteen'
+import HlsLogo from '@/pages/detail/hls-logo'
 import { CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
 
@@ -61,6 +62,7 @@ const routes = [
   { path: '/cylinder', Component: Cylinder },
   { path: '/twelve', Component: Twelve },
   { path: '/thirteen', Component: Thirteen },
+  { path: '/hls-logo', Component: HlsLogo },
 ]
 ReactDOM.render(
   <HashRouter>
