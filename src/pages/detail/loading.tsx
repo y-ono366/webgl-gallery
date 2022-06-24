@@ -41,6 +41,15 @@ const Loading = withRouter((props) => {
   React.useEffect(() => {
     pixisec.current.appendChild(app.view)
 
+    const loadText = async (): Promise<void> => {
+      await new FontFaceObserver('zouver2').load()
+      PIXI.TextMetrics.BASELINE_SYMBOL += 'E'
+      Text.style = style
+      Text.x = window.innerWidth / 2
+      Text.y = window.innerHeight / 2
+      Text.anchor.set(0.5)
+      app.stage.addChild(Text)
+    }
     loadText()
 
     NText.beginFill(0xffffff)
@@ -77,7 +86,7 @@ const Loading = withRouter((props) => {
     CText.pivot.x = 80
     CText.pivot.y = 70
 
-    loopIntervalid = setInterval(loopText, 200)
+    loopIntervalid = setInterval(loopText, 350)
 
     return () => {
       app.destroy(true)
@@ -95,16 +104,6 @@ const Loading = withRouter((props) => {
       Text.text = text[textId]
       textId++
     })
-  }
-
-  const loadText = async (): Promise<void> => {
-    await new FontFaceObserver('zouver2').load()
-    PIXI.TextMetrics.BASELINE_SYMBOL += 'E'
-    Text.style = style
-    Text.x = window.innerWidth / 2
-    Text.y = window.innerHeight / 2
-    Text.anchor.set(0.5)
-    app.stage.addChild(Text)
   }
 
   const animate = (): void => {
